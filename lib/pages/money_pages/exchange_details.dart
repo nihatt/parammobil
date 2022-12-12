@@ -15,22 +15,21 @@ class ExchangeDetails extends StatefulWidget {
 }
 
 class _ExchangeDetailsState extends State<ExchangeDetails> {
-  final TextEditingController _filter = new TextEditingController();
-  String _searchText = "";
+  final TextEditingController _filter = TextEditingController();
+  final String _searchText = "";
   TextEditingController textController = TextEditingController();
   List _loadedData = [];
-  List _allNames = [];
+  final List _allNames = [];
   List _filteredData = []; // names filtered by search text
-  Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Döviz Kurları');
+  Icon _searchIcon = const Icon(Icons.search);
+  Widget _appBarTitle = const Text('Döviz Kurları');
   Future<void> _fetchData() async {
     const API_URL = 'https://api.collectapi.com/economy/allCurrency';
 
     final response = await http.get(
       Uri.parse(API_URL),
       headers: {
-        HttpHeaders.authorizationHeader:
-            'apikey 71ymkw3IEAL4LUPDpKPb9e:0YVJZGjN78b4agycSlfkJ7',
+        HttpHeaders.authorizationHeader: 'apikey 71ymkw3IEAL4LUPDpKPb9e:0YVJZGjN78b4agycSlfkJ7',
         HttpHeaders.contentTypeHeader: 'application/json',
       },
     );
@@ -41,26 +40,22 @@ class _ExchangeDetailsState extends State<ExchangeDetails> {
       _loadedData = data['result'];
       _allNames.add(_loadedData.map((e) => e['name']));
       _filteredData = _loadedData;
-      print(_loadedData);
-      print(_loadedData.length);
     });
   }
 
   onItemChanged(String value) {
     setState(() {
-      _filteredData = _loadedData
-          .where((string) =>
-              string.toString().toLowerCase().contains(value.toLowerCase()))
-          .toList();
+      _filteredData =
+          _loadedData.where((string) => string.toString().toLowerCase().contains(value.toLowerCase())).toList();
     });
   }
 
   void _searchPressed() {
     setState(() {
       if (_searchIcon.icon == Icons.search) {
-        _searchIcon = Icon(Icons.close);
+        _searchIcon = const Icon(Icons.close);
         _appBarTitle = TextField(
-          style: TextStyle(color: Colors.white, backgroundColor: Colors.blue),
+          style: const TextStyle(color: Colors.white, backgroundColor: Colors.blue),
           controller: _filter,
           onChanged: onItemChanged,
           decoration: const InputDecoration(
@@ -71,8 +66,8 @@ class _ExchangeDetailsState extends State<ExchangeDetails> {
               fillColor: (Colors.blue)),
         );
       } else {
-        _searchIcon = Icon(Icons.search);
-        _appBarTitle = Text('Döviz Kurları');
+        _searchIcon = const Icon(Icons.search);
+        _appBarTitle = const Text('Döviz Kurları');
         _filteredData = _loadedData;
         _filter.clear();
       }
@@ -94,15 +89,14 @@ class _ExchangeDetailsState extends State<ExchangeDetails> {
         body: RefreshIndicator(
           onRefresh: _fetchData,
           child: SafeArea(
-            child: _loadedData.length == 0
+            child: _loadedData.isEmpty
                 ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: const [
                         CircularProgressIndicator(),
-                        Text("Yükleniyor",
-                            style: TextStyle(color: Colors.blue)),
+                        Text("Yükleniyor", style: TextStyle(color: Colors.blue)),
                       ],
                     ),
                   )

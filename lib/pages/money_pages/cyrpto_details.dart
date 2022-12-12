@@ -13,23 +13,22 @@ class CyrptoDetails extends StatefulWidget {
 }
 
 class _CyrptoDetailsState extends State<CyrptoDetails> {
-  final TextEditingController _filter = new TextEditingController();
-  String _searchText = "";
+  final TextEditingController _filter = TextEditingController();
+  final String _searchText = "";
   TextEditingController textController = TextEditingController();
   late Color cyrptocolor;
   List _loadedData = [];
-  List _allNames = [];
+  final List _allNames = [];
   List _filteredData = []; // names filtered by search text
-  Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Kripto Paralar');
+  Icon _searchIcon = const Icon(Icons.search);
+  Widget _appBarTitle = const Text('Kripto Paralar');
   Future<void> _fetchData() async {
     const API_URL = 'https://api.collectapi.com/economy/cripto';
 
     final response = await http.get(
       Uri.parse(API_URL),
       headers: {
-        HttpHeaders.authorizationHeader:
-            'apikey 71ymkw3IEAL4LUPDpKPb9e:0YVJZGjN78b4agycSlfkJ7',
+        HttpHeaders.authorizationHeader: 'apikey 71ymkw3IEAL4LUPDpKPb9e:0YVJZGjN78b4agycSlfkJ7',
         HttpHeaders.contentTypeHeader: 'application/json',
       },
     );
@@ -47,19 +46,17 @@ class _CyrptoDetailsState extends State<CyrptoDetails> {
 
   onItemChanged(String value) {
     setState(() {
-      _filteredData = _loadedData
-          .where((string) =>
-              string.toString().toLowerCase().contains(value.toLowerCase()))
-          .toList();
+      _filteredData =
+          _loadedData.where((string) => string.toString().toLowerCase().contains(value.toLowerCase())).toList();
     });
   }
 
   void _searchPressed() {
     setState(() {
       if (_searchIcon.icon == Icons.search) {
-        _searchIcon = Icon(Icons.close);
+        _searchIcon = const Icon(Icons.close);
         _appBarTitle = TextField(
-          style: TextStyle(color: Colors.white, backgroundColor: Colors.blue),
+          style: const TextStyle(color: Colors.white, backgroundColor: Colors.blue),
           controller: _filter,
           onChanged: onItemChanged,
           decoration: const InputDecoration(
@@ -70,8 +67,8 @@ class _CyrptoDetailsState extends State<CyrptoDetails> {
               fillColor: (Colors.blue)),
         );
       } else {
-        _searchIcon = Icon(Icons.search);
-        _appBarTitle = Text('Kripto Paralar');
+        _searchIcon = const Icon(Icons.search);
+        _appBarTitle = const Text('Kripto Paralar');
         _filteredData = _loadedData;
         _filter.clear();
       }
@@ -93,15 +90,14 @@ class _CyrptoDetailsState extends State<CyrptoDetails> {
         body: RefreshIndicator(
           onRefresh: _fetchData,
           child: SafeArea(
-            child: _loadedData.length == 0
+            child: _loadedData.isEmpty
                 ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: const [
                         CircularProgressIndicator(),
-                        Text("Yükleniyor",
-                            style: TextStyle(color: Colors.blue)),
+                        Text("Yükleniyor", style: TextStyle(color: Colors.blue)),
                       ],
                     ),
                   )
@@ -115,9 +111,8 @@ class _CyrptoDetailsState extends State<CyrptoDetails> {
                             itemCount: _filteredData.length,
                             itemBuilder: (BuildContext context, int index) {
                               return CyrptoCard(
-                                name: _filteredData[index]['name']
-                                    .toString()
-                                    .toUpperCase(),
+                                index: index,
+                                name: _filteredData[index]['name'].toString().toUpperCase(),
                                 value: _filteredData[index]['price'],
                                 dailychange: _filteredData[index]['changeDay'],
                                 hourchange: _filteredData[index]['changeHour'],

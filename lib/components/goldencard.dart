@@ -17,13 +17,11 @@ class GoldenCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.05,
-          vertical: MediaQuery.of(context).size.height * 0.04),
+          horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.height * 0.04),
       decoration: BoxDecoration(
           color: Colors.pink,
           image: const DecorationImage(
-            image: NetworkImage(
-                "https://ak.picdn.net/shutterstock/videos/21155113/thumb/1.jpg"),
+            image: NetworkImage("https://ak.picdn.net/shutterstock/videos/21155113/thumb/1.jpg"),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(20)),
@@ -32,8 +30,8 @@ class GoldenCard extends StatelessWidget {
           Container(
             //resim kısmı
             width: MediaQuery.of(context).size.width * 0.25,
-            padding: EdgeInsets.only(top: 10),
-            decoration: BoxDecoration(),
+            padding: const EdgeInsets.only(top: 10),
+            decoration: const BoxDecoration(),
             child: ClipOval(
               child: Image.network(
                 "http://cdn.shopify.com/s/files/1/1144/7870/products/lalegold-ziynet-roter-kurplu-500x500_114ae1cf-12e9-4cce-a2b1-a9fa6edf2878_grande.png?v=1515795837",
@@ -43,7 +41,7 @@ class GoldenCard extends StatelessWidget {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width * 0.65,
             child: Column(
               // data kısmı
@@ -51,21 +49,15 @@ class GoldenCard extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text("ALIŞ"),
-                    Text(buying.toDouble().toString())
-                  ],
+                  children: [const Text("ALIŞ"), Text(buying.toDouble().toString())],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text("SATIŞ"),
-                    Text(selling.toDouble().toString())
-                  ],
+                  children: [const Text("SATIŞ"), Text(selling.toDouble().toString())],
                 )
               ],
             ),
