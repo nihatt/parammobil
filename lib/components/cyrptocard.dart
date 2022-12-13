@@ -68,9 +68,9 @@ class _CyrptoCardState extends State<CyrptoCard> {
                                 padding: const EdgeInsets.all(12.0),
                                 child: Column(
                                   children: [
-                                    Text(widget.name, style: const TextStyle(fontSize: 25, color: Colors.white)),
+                                    Text(widget.name, style: const TextStyle(fontSize: 30, color: Colors.white)),
                                     Container(
-                                      padding: const EdgeInsets.only(top: 50),
+                                      padding: const EdgeInsets.only(top: 40),
                                       height: MediaQuery.of(context).size.height * 0.4,
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:coins/components/goldencard.dart';
+import 'package:coins/components/loadingcard.dart';
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:http/http.dart' as http;
@@ -14,22 +15,21 @@ class GoldenDetails extends StatefulWidget {
 }
 
 class _GoldenDetailsState extends State<GoldenDetails> {
-  final TextEditingController _filter = new TextEditingController();
+  final TextEditingController _filter = TextEditingController();
   String _searchText = "";
   TextEditingController textController = TextEditingController();
   List _loadedData = [];
-  List _allNames = [];
+  final List _allNames = [];
   List _filteredData = []; // names filtered by search text
-  Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Altın fiyatları');
+  Icon _searchIcon = const Icon(Icons.search);
+  Widget _appBarTitle = const Text('Altın fiyatları');
   Future<void> _fetchData() async {
     const API_URL = 'https://api.collectapi.com/economy/goldPrice';
 
     final response = await http.get(
       Uri.parse(API_URL),
       headers: {
-        HttpHeaders.authorizationHeader:
-            'apikey 71ymkw3IEAL4LUPDpKPb9e:0YVJZGjN78b4agycSlfkJ7',
+        HttpHeaders.authorizationHeader: 'apikey 71ymkw3IEAL4LUPDpKPb9e:0YVJZGjN78b4agycSlfkJ7',
         HttpHeaders.contentTypeHeader: 'application/json',
       },
     );
@@ -62,19 +62,17 @@ class _GoldenDetailsState extends State<GoldenDetails> {
 
   onItemChanged(String value) {
     setState(() {
-      _filteredData = _loadedData
-          .where((string) =>
-              string.toString().toLowerCase().contains(value.toLowerCase()))
-          .toList();
+      _filteredData =
+          _loadedData.where((string) => string.toString().toLowerCase().contains(value.toLowerCase())).toList();
     });
   }
 
   void _searchPressed() {
     setState(() {
       if (_searchIcon.icon == Icons.search) {
-        _searchIcon = Icon(Icons.close);
+        _searchIcon = const Icon(Icons.close);
         _appBarTitle = TextField(
-          style: TextStyle(color: Colors.white, backgroundColor: Colors.blue),
+          style: const TextStyle(color: Colors.white, backgroundColor: Colors.blue),
           controller: _filter,
           onChanged: onItemChanged,
           decoration: const InputDecoration(
@@ -85,8 +83,8 @@ class _GoldenDetailsState extends State<GoldenDetails> {
               fillColor: (Colors.blue)),
         );
       } else {
-        _searchIcon = Icon(Icons.search);
-        _appBarTitle = Text('Altın fiyatları');
+        _searchIcon = const Icon(Icons.search);
+        _appBarTitle = const Text('Altın fiyatları');
         _filteredData = _loadedData;
         _filter.clear();
       }
@@ -108,18 +106,8 @@ class _GoldenDetailsState extends State<GoldenDetails> {
         body: RefreshIndicator(
           onRefresh: _fetchData,
           child: SafeArea(
-            child: _loadedData.length == 0
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(),
-                        Text("Yükleniyor",
-                            style: TextStyle(color: Colors.blue)),
-                      ],
-                    ),
-                  )
+            child: _loadedData.isEmpty
+                ? const loadingcard()
                 : SingleChildScrollView(
                     child: SizedBox(
                       child: Column(

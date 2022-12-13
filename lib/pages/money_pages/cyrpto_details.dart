@@ -1,4 +1,5 @@
 import 'package:coins/components/cyrptocard.dart';
+import 'package:coins/components/loadingcard.dart';
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:http/http.dart' as http;
@@ -91,16 +92,7 @@ class _CyrptoDetailsState extends State<CyrptoDetails> {
           onRefresh: _fetchData,
           child: SafeArea(
             child: _loadedData.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(),
-                        Text("Yükleniyor", style: TextStyle(color: Colors.blue)),
-                      ],
-                    ),
-                  )
+                ? const loadingcard()
                 : SingleChildScrollView(
                     child: SizedBox(
                       child: Column(
