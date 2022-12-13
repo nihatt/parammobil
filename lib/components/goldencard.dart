@@ -15,11 +15,10 @@ class GoldenCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
-      height: MediaQuery.of(context).size.height * 0.15,
+      height: MediaQuery.of(context).size.height * 0.16,
       margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.height * 0.04),
+          horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.height * 0.03),
       decoration: BoxDecoration(
-          color: Colors.pink,
           image: const DecorationImage(
             image: NetworkImage("https://ak.picdn.net/shutterstock/videos/21155113/thumb/1.jpg"),
             fit: BoxFit.cover,
@@ -49,7 +48,7 @@ class GoldenCard extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

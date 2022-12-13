@@ -7,12 +7,7 @@ class ExchangeCard extends StatelessWidget {
   final num buying;
   final num selling;
 
-  const ExchangeCard(
-      {Key? key,
-      required this.name,
-      required this.buying,
-      required this.selling})
-      : super(key: key);
+  const ExchangeCard({Key? key, required this.name, required this.buying, required this.selling}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +15,7 @@ class ExchangeCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.05,
-          vertical: MediaQuery.of(context).size.height * 0.04),
+          horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.height * 0.04),
       decoration: BoxDecoration(
           color: Colors.pink,
           image: const DecorationImage(
@@ -38,8 +32,8 @@ class ExchangeCard extends StatelessWidget {
               Container(
                 //resim kısmı
                 width: MediaQuery.of(context).size.width * 0.25,
-                padding: EdgeInsets.only(top: 3),
-                decoration: BoxDecoration(),
+                padding: const EdgeInsets.only(top: 3),
+                decoration: const BoxDecoration(),
                 child: ClipOval(
                   child: Image.network(
                     "https://www.pngall.com/wp-content/uploads/2/Currency-PNG.png",
@@ -49,7 +43,7 @@ class ExchangeCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.65,
                 child: Column(
                   // data kısmı
@@ -57,45 +51,36 @@ class ExchangeCard extends StatelessWidget {
                   children: [
                     Text(
                       name.toUpperCase(),
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(10)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const Text(
                             "ALIŞ",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w700),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                           ),
                           Text(
                             buying.toDouble().toString(),
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w700),
+                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                           )
                         ],
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(10)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const Text(
                             "SATIŞ",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w700),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                           ),
                           Text(
                             selling.toDouble().toString(),
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w700),
+                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                           )
                         ],
                       ),

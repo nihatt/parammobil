@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:coins/components/exchangecard.dart';
-import 'package:coins/components/goldencard.dart';
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:http/http.dart' as http;
+
+import '../../components/loadingcard.dart';
 
 class ExchangeDetails extends StatefulWidget {
   const ExchangeDetails({Key? key}) : super(key: key);
@@ -90,16 +89,7 @@ class _ExchangeDetailsState extends State<ExchangeDetails> {
           onRefresh: _fetchData,
           child: SafeArea(
             child: _loadedData.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(),
-                        Text("Yükleniyor", style: TextStyle(color: Colors.blue)),
-                      ],
-                    ),
-                  )
+                ? const loadingcard()
                 : SingleChildScrollView(
                     child: SizedBox(
                       child: Column(
