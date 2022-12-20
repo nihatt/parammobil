@@ -20,7 +20,7 @@ class GoldenCard extends StatelessWidget {
           horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.height * 0.03),
       decoration: BoxDecoration(
           image: const DecorationImage(
-            image: NetworkImage("https://ak.picdn.net/shutterstock/videos/21155113/thumb/1.jpg"),
+            image: AssetImage("assets/images/goldback.jpg"),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(20)),
@@ -29,14 +29,18 @@ class GoldenCard extends StatelessWidget {
           Container(
             //resim kısmı
             width: MediaQuery.of(context).size.width * 0.25,
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+
             decoration: const BoxDecoration(),
             child: ClipOval(
-              child: Image.network(
-                "http://cdn.shopify.com/s/files/1/1144/7870/products/lalegold-ziynet-roter-kurplu-500x500_114ae1cf-12e9-4cce-a2b1-a9fa6edf2878_grande.png?v=1515795837",
-                height: 120,
-                width: 120,
-                fit: BoxFit.cover,
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                child: Image.asset(
+                  "assets/images/goldfront.webp",
+                  height: 120,
+                  width: 120,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

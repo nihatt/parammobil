@@ -1,11 +1,10 @@
-import 'package:coins/components/cyrptocard.dart';
 import 'package:coins/components/loadingcard.dart';
 import 'package:coins/components/marketcard.dart';
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+import 'package:easy_load_more/easy_load_more.dart';
 
 class MarketDetails extends StatefulWidget {
   const MarketDetails({Key? key}) : super(key: key);
@@ -39,7 +38,7 @@ class _MarketDetailsState extends State<MarketDetails> {
     setState(() {
       _loadedData = data['result'];
       _allNames.add(_loadedData.map((e) => e['name']));
-      _filteredData = _loadedData;
+      _filteredData = _loadedData.sublist(0, 5);
       print(_loadedData);
       print(_loadedData.length);
     });
@@ -70,9 +69,29 @@ class _MarketDetailsState extends State<MarketDetails> {
       } else {
         _searchIcon = const Icon(Icons.search);
         _appBarTitle = const Text('Canlı Borsa');
-        _filteredData = _loadedData;
+        _filteredData = _loadedData.sublist(0, 5);
         _filter.clear();
       }
+    });
+  }
+
+  Future<bool> _loadMore() async {
+    await Future.delayed(
+      const Duration(
+        seconds: 0,
+        milliseconds: 2500,
+      ),
+    );
+    _loadItems();
+    return true;
+  }
+
+  int entrance = 0;
+  void _loadItems() {
+    if (!mounted) return;
+    setState(() {
+      entrance += 5;
+      _filteredData.addAll(_loadedData.sublist(entrance, entrance + 5));
     });
   }
 
@@ -84,20 +103,25 @@ class _MarketDetailsState extends State<MarketDetails> {
       print("Breaked");
     }
     return Scaffold(
-        appBar: AppBar(
-          title: _appBarTitle,
-          actions: [IconButton(onPressed: _searchPressed, icon: _searchIcon)],
-        ),
-        body: RefreshIndicator(
-          onRefresh: _fetchData,
-          child: SafeArea(
-            child: _loadedData.isEmpty
-                ? const loadingcard()
-                : SingleChildScrollView(
-                    child: SizedBox(
-                      child: Column(
-                        children: [
-                          Scrollbar(
+      appBar: AppBar(
+        title: _appBarTitle,
+        actions: [IconButton(onPressed: _searchPressed, icon: _searchIcon)],
+      ),
+      body: RefreshIndicator(
+        onRefresh: _fetchData,
+        child: SafeArea(
+          child: _loadedData.isEmpty
+              ? const loadingcard()
+              : SingleChildScrollView(
+                  child: SizedBox(
+                    child: Column(
+                      children: [
+                        Scrollbar(
+                          child: EasyLoadMore(
+                            loadingStatusText: "Yükleniyor...",
+                            finishedStatusText: "Daha fazla veri yok...",
+                            isFinished: _filteredData.length >= _loadedData.length,
+                            onLoadMore: _loadMore,
                             child: ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -107,12 +131,14 @@ class _MarketDetailsState extends State<MarketDetails> {
                                     name: _filteredData[index]['name'], price: _filteredData[index]['price']);
                               },
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-          ),
-        ));
+                ),
+        ),
+      ),
+    );
   }
 }

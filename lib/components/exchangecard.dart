@@ -1,97 +1,107 @@
+import 'dart:math';
 import 'dart:ui';
 
+import 'package:coins/data/imagedata.dart';
 import 'package:flutter/material.dart';
+import 'package:flip_card/flip_card.dart';
 
 class ExchangeCard extends StatelessWidget {
   final String name;
   final num buying;
   final num selling;
 
-  const ExchangeCard({Key? key, required this.name, required this.buying, required this.selling}) : super(key: key);
-
+  ExchangeCard({Key? key, required this.name, required this.buying, required this.selling}) : super(key: key);
+  List<Color?> colors = [
+    Colors.blueGrey[100],
+    Colors.amber[200],
+    Colors.purple[100],
+    Colors.teal[100],
+    Colors.pink[100],
+    Colors.green[100]
+  ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
-      height: MediaQuery.of(context).size.height * 0.15,
-      margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.height * 0.04),
-      decoration: BoxDecoration(
-          color: Colors.pink,
-          image: const DecorationImage(
-            image: NetworkImage(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrx5-zP7h8xwlklnhZRxKwOu0pi-uIBdfEyw&usqp=CAU"),
-            fit: BoxFit.fill,
-          ),
-          borderRadius: BorderRadius.circular(20)),
-      child: ClipRRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-          child: Row(
-            children: [
-              Container(
-                //resim kısmı
-                width: MediaQuery.of(context).size.width * 0.25,
-                padding: const EdgeInsets.only(top: 3),
-                decoration: const BoxDecoration(),
-                child: ClipOval(
-                  child: Image.network(
-                    "https://www.pngall.com/wp-content/uploads/2/Currency-PNG.png",
-                    height: 120,
-                    width: 120,
-                    fit: BoxFit.cover,
+    if (name != "") {
+      return SizedBox(
+        child: FlipCard(
+          fill: Fill.none,
+          direction: FlipDirection.HORIZONTAL, // default
+          front: Container(
+            width: MediaQuery.of(context).size.width * 0.16,
+            height: MediaQuery.of(context).size.height * 0.16,
+            margin: const EdgeInsets.symmetric(vertical: 18),
+            decoration: BoxDecoration(
+                border: Border.all(width: 1),
+                borderRadius: BorderRadius.circular(25),
+                image: DecorationImage(image: AssetImage(images[Random().nextInt(images.length)]), fit: BoxFit.cover)),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                child: Center(
+                    child: Text(
+                  name.toUpperCase(),
+                  style: const TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    wordSpacing: 2,
+                    fontWeight: FontWeight.bold,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(0.0, 0.0),
+                        blurRadius: 10.0,
+                        color: Color.fromARGB(255, 12, 44, 45),
+                      ),
+                      Shadow(
+                        offset: Offset(0.0, 0.0),
+                        blurRadius: 20.0,
+                        color: Color.fromARGB(123, 240, 41, 41),
+                      ),
+                    ],
                   ),
-                ),
+                )),
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.65,
-                child: Column(
-                  // data kısmı
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      name.toUpperCase(),
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Text(
-                            "ALIŞ",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                          ),
-                          Text(
-                            buying.toDouble().toString(),
-                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Text(
-                            "SATIŞ",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                          ),
-                          Text(
-                            selling.toDouble().toString(),
-                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
+            ),
           ),
+          back: Container(
+              height: MediaQuery.of(context).size.height * 0.16,
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                  color: colors[Random().nextInt(colors.length)],
+                  border: Border.all(width: 1),
+                  borderRadius: BorderRadius.circular(25)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Text(
+                        "ALIŞ",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                      ),
+                      Text(
+                        selling.toString(),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Text("SATIŞ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
+                      Text(
+                        buying.toString(),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      )
+                    ],
+                  )
+                ],
+              )),
         ),
-      ),
-    );
+      );
+    } else {
+      return const SizedBox(width: 20);
+    }
   }
 }
