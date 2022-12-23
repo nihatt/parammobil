@@ -29,7 +29,8 @@ class _CyrptoDetailsState extends State<CyrptoDetails> {
     final response = await http.get(
       Uri.parse(API_URL),
       headers: {
-        HttpHeaders.authorizationHeader: 'apikey 71ymkw3IEAL4LUPDpKPb9e:0YVJZGjN78b4agycSlfkJ7',
+        HttpHeaders.authorizationHeader:
+            'apikey 4gBlWdpIoTGRQUKzdMdqsK:4UCQII08SOvRAIZqj5MVb6',
         HttpHeaders.contentTypeHeader: 'application/json',
       },
     );
@@ -47,8 +48,10 @@ class _CyrptoDetailsState extends State<CyrptoDetails> {
 
   onItemChanged(String value) {
     setState(() {
-      _filteredData =
-          _loadedData.where((string) => string.toString().toLowerCase().contains(value.toLowerCase())).toList();
+      _filteredData = _loadedData
+          .where((string) =>
+              string.toString().toLowerCase().contains(value.toLowerCase()))
+          .toList();
     });
   }
 
@@ -57,7 +60,8 @@ class _CyrptoDetailsState extends State<CyrptoDetails> {
       if (_searchIcon.icon == Icons.search) {
         _searchIcon = const Icon(Icons.close);
         _appBarTitle = TextField(
-          style: const TextStyle(color: Colors.white, backgroundColor: Colors.blue),
+          style: const TextStyle(
+              color: Colors.white, backgroundColor: Colors.blue),
           controller: _filter,
           onChanged: onItemChanged,
           decoration: const InputDecoration(
@@ -104,7 +108,9 @@ class _CyrptoDetailsState extends State<CyrptoDetails> {
                             itemBuilder: (BuildContext context, int index) {
                               return CyrptoCard(
                                 index: index,
-                                name: _filteredData[index]['name'].toString().toUpperCase(),
+                                name: _filteredData[index]['name']
+                                    .toString()
+                                    .toUpperCase(),
                                 value: _filteredData[index]['price'],
                                 dailychange: _filteredData[index]['changeDay'],
                                 hourchange: _filteredData[index]['changeHour'],

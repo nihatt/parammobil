@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GoldenCard extends StatelessWidget {
   final String name;
@@ -17,7 +18,8 @@ class GoldenCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.16,
       margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.height * 0.03),
+          horizontal: MediaQuery.of(context).size.width * 0.05,
+          vertical: MediaQuery.of(context).size.height * 0.03),
       decoration: BoxDecoration(
           image: const DecorationImage(
             image: AssetImage("assets/images/goldback.jpg"),
@@ -52,15 +54,23 @@ class GoldenCard extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+                  style: GoogleFonts.acme(
+                      textStyle: const TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.w400)),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [const Text("ALIŞ"), Text(buying.toDouble().toString())],
+                  children: [
+                    const Text("ALIŞ"),
+                    Text(buying.toDouble().toString())
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [const Text("SATIŞ"), Text(selling.toDouble().toString())],
+                  children: [
+                    const Text("SATIŞ"),
+                    Text(selling.toDouble().toString())
+                  ],
                 )
               ],
             ),

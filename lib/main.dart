@@ -1,4 +1,5 @@
 import 'package:coins/components/mainlistcard.dart';
+import 'package:coins/pages/landing_page.dart';
 import 'package:coins/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'ParamMobil',
-      home: MainPage(),
+      home: LandingPage(),
     );
   }
 }

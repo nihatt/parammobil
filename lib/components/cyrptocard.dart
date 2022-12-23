@@ -45,14 +45,14 @@ class _CyrptoCardState extends State<CyrptoCard> {
         builder: (BuildContext context) {
           return Container(
               child: Dialog(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
                   child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         image: const DecorationImage(
                             opacity: 1,
-                            image: NetworkImage(
-                                "https://www.captechu.edu/sites/default/files/The%20link%20between%20cryptocurrency%20coding%20and%20market%20behavior.jpg"),
+                            image: AssetImage("assets/images/grafbg.jpg"),
                             fit: BoxFit.cover),
                       ),
                       constraints: const BoxConstraints(maxHeight: 500),
@@ -68,26 +68,40 @@ class _CyrptoCardState extends State<CyrptoCard> {
                                 padding: const EdgeInsets.all(12.0),
                                 child: Column(
                                   children: [
-                                    Text(widget.name, style: const TextStyle(fontSize: 30, color: Colors.white)),
+                                    Text(widget.name,
+                                        style: const TextStyle(
+                                            fontSize: 30, color: Colors.white)),
                                     Container(
                                       padding: const EdgeInsets.only(top: 40),
-                                      height: MediaQuery.of(context).size.height * 0.4,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.4,
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Container(
                                             height: 30,
                                             decoration: BoxDecoration(
-                                                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 10),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
                                                   child: Text(
                                                     "Fiyat".toUpperCase(),
-                                                    style: const TextStyle(fontWeight: FontWeight.w600),
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                                   ),
                                                 ),
                                                 Text(widget.value.toString())
@@ -96,52 +110,80 @@ class _CyrptoCardState extends State<CyrptoCard> {
                                           ),
                                           Container(
                                             height: 30,
-                                            decoration:
-                                                BoxDecoration(color: renk1, borderRadius: BorderRadius.circular(5)),
+                                            decoration: BoxDecoration(
+                                                color: renk1,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 10),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
                                                   child: Text(
-                                                    "Saatlik Değişim".toUpperCase(),
-                                                    style: const TextStyle(fontWeight: FontWeight.w600),
+                                                    "Saatlik Değişim"
+                                                        .toUpperCase(),
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                                   ),
                                                 ),
-                                                Text(widget.hourchange.toString())
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            height: 30,
-                                            decoration:
-                                                BoxDecoration(color: renk2, borderRadius: BorderRadius.circular(5)),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left: 10),
-                                                  child: Text(
-                                                    "Günlük Değişim".toUpperCase(),
-                                                    style: const TextStyle(fontWeight: FontWeight.w600),
-                                                  ),
-                                                ),
-                                                Text(widget.dailychange.toString())
+                                                Text(widget.hourchange
+                                                    .toString())
                                               ],
                                             ),
                                           ),
                                           Container(
                                             height: 30,
                                             decoration: BoxDecoration(
-                                                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                                                color: renk2,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 10),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Text(
+                                                    "Günlük Değişim"
+                                                        .toUpperCase(),
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ),
+                                                Text(widget.dailychange
+                                                    .toString())
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
                                                   child: Text(
                                                     "Hacim".toUpperCase(),
-                                                    style: const TextStyle(fontWeight: FontWeight.w600),
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                                   ),
                                                 ),
                                                 Text(widget.volume.toString())
@@ -151,18 +193,28 @@ class _CyrptoCardState extends State<CyrptoCard> {
                                           Container(
                                             height: 30,
                                             decoration: BoxDecoration(
-                                                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 10),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
                                                   child: Text(
-                                                    "Piyasa Değeri".toUpperCase(),
-                                                    style: const TextStyle(fontWeight: FontWeight.w600),
+                                                    "Piyasa Değeri"
+                                                        .toUpperCase(),
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600),
                                                   ),
                                                 ),
-                                                Text(widget.marketcap.toString())
+                                                Text(
+                                                    widget.marketcap.toString())
                                               ],
                                             ),
                                           ),
@@ -187,13 +239,40 @@ class _CyrptoCardState extends State<CyrptoCard> {
         print(widget.index);
       },
       child: Container(
-        decoration: BoxDecoration(color: widget.index % 2 == 0 ? Colors.white : Colors.grey[350]),
+        decoration: BoxDecoration(
+            color: widget.index % 2 == 0 ? Colors.white : Colors.grey[350]),
         padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.05, vertical: MediaQuery.of(context).size.height * 0.03),
+            horizontal: MediaQuery.of(context).size.width * 0.05,
+            vertical: MediaQuery.of(context).size.height * 0.03),
         width: MediaQuery.of(context).size.width * 1,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text(widget.name), Text(widget.value.toString() + ' \$')],
+          children: [
+            Row(
+              children: [
+                Text(
+                  widget.name,
+                  style: TextStyle(
+                      fontWeight: widget.index % 2 == 0
+                          ? FontWeight.w600
+                          : FontWeight.normal),
+                ),
+                Icon(
+                  widget.dailychange < 0
+                      ? Icons.arrow_circle_down
+                      : Icons.arrow_circle_up,
+                  color: widget.dailychange < 0 ? Colors.red : Colors.green,
+                ),
+              ],
+            ),
+            Text(
+              widget.value.toString() + ' \$',
+              style: TextStyle(
+                  fontWeight: widget.index % 2 == 0
+                      ? FontWeight.w600
+                      : FontWeight.normal),
+            )
+          ],
         ),
       ),
     );

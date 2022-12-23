@@ -28,7 +28,8 @@ class _MarketDetailsState extends State<MarketDetails> {
     final response = await http.get(
       Uri.parse(API_URL),
       headers: {
-        HttpHeaders.authorizationHeader: 'apikey 71ymkw3IEAL4LUPDpKPb9e:0YVJZGjN78b4agycSlfkJ7',
+        HttpHeaders.authorizationHeader:
+            'apikey 4gBlWdpIoTGRQUKzdMdqsK:4UCQII08SOvRAIZqj5MVb6',
         HttpHeaders.contentTypeHeader: 'application/json',
       },
     );
@@ -38,7 +39,7 @@ class _MarketDetailsState extends State<MarketDetails> {
     setState(() {
       _loadedData = data['result'];
       _allNames.add(_loadedData.map((e) => e['name']));
-      _filteredData = _loadedData.sublist(0, 5);
+      _filteredData.addAll(_loadedData.sublist(0, 5));
       print(_loadedData);
       print(_loadedData.length);
     });
@@ -46,8 +47,10 @@ class _MarketDetailsState extends State<MarketDetails> {
 
   onItemChanged(String value) {
     setState(() {
-      _filteredData =
-          _loadedData.where((string) => string.toString().toLowerCase().contains(value.toLowerCase())).toList();
+      _filteredData = _loadedData
+          .where((string) =>
+              string.toString().toLowerCase().contains(value.toLowerCase()))
+          .toList();
     });
   }
 
@@ -56,7 +59,8 @@ class _MarketDetailsState extends State<MarketDetails> {
       if (_searchIcon.icon == Icons.search) {
         _searchIcon = const Icon(Icons.close);
         _appBarTitle = TextField(
-          style: const TextStyle(color: Colors.white, backgroundColor: Colors.blue),
+          style: const TextStyle(
+              color: Colors.white, backgroundColor: Colors.blue),
           controller: _filter,
           onChanged: onItemChanged,
           decoration: const InputDecoration(
@@ -69,7 +73,7 @@ class _MarketDetailsState extends State<MarketDetails> {
       } else {
         _searchIcon = const Icon(Icons.search);
         _appBarTitle = const Text('Canlı Borsa');
-        _filteredData = _loadedData.sublist(0, 5);
+        _filteredData.addAll(_loadedData.sublist(0, 5));
         _filter.clear();
       }
     });
@@ -99,9 +103,7 @@ class _MarketDetailsState extends State<MarketDetails> {
   Widget build(BuildContext context) {
     if (_loadedData.isEmpty) {
       _fetchData();
-    } else {
-      print("Breaked");
-    }
+    } else {}
     return Scaffold(
       appBar: AppBar(
         title: _appBarTitle,
@@ -120,7 +122,8 @@ class _MarketDetailsState extends State<MarketDetails> {
                           child: EasyLoadMore(
                             loadingStatusText: "Yükleniyor...",
                             finishedStatusText: "Daha fazla veri yok...",
-                            isFinished: _filteredData.length >= _loadedData.length,
+                            isFinished:
+                                _filteredData.length >= _loadedData.length,
                             onLoadMore: _loadMore,
                             child: ListView.builder(
                               shrinkWrap: true,
@@ -128,7 +131,8 @@ class _MarketDetailsState extends State<MarketDetails> {
                               itemCount: _filteredData.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return MarketCard(
-                                    name: _filteredData[index]['name'], price: _filteredData[index]['price']);
+                                    name: _filteredData[index]['name'],
+                                    price: _filteredData[index]['price']);
                               },
                             ),
                           ),

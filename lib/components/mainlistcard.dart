@@ -36,7 +36,7 @@ class MainCard extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.2,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(picurl),
+                image: AssetImage(picurl),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(10),
